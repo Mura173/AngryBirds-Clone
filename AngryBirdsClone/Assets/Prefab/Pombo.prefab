@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 731608056287766588}
   - component: {fileID: 2518873678282473590}
   - component: {fileID: 9152003089819741382}
-  m_Layer: 0
+  - component: {fileID: 2225531575797570498}
+  m_Layer: 3
   m_Name: Pombo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,9 +73,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -668815325
+  m_SortingLayer: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 86ce912717672b8429c58e6960c12e25, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -94,7 +95,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5565307947503085702}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -145,6 +146,24 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.08989185, y: 0.012147546}
+  m_Offset: {x: 0.042281985, y: -0.02973795}
   serializedVersion: 2
-  m_Radius: 0.39218944
+  m_Radius: 0.52494967
+--- !u!114 &2225531575797570498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5565307947503085702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442d14c903d33864f8e60cef68be6f70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layer:
+    serializedVersion: 2
+    m_Bits: 8
+  clicked: 0
+  lineFront: {fileID: 0}
+  lineBack: {fileID: 0}
