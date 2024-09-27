@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 731608056287766588}
   - component: {fileID: 2518873678282473590}
   - component: {fileID: 9152003089819741382}
+  - component: {fileID: 3595517069312192655}
   - component: {fileID: 2225531575797570498}
   m_Layer: 3
   m_Name: Pombo
@@ -113,7 +114,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!58 &9152003089819741382
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -149,6 +150,27 @@ CircleCollider2D:
   m_Offset: {x: 0.042281985, y: -0.02973795}
   serializedVersion: 2
   m_Radius: 0.52494967
+--- !u!231 &3595517069312192655
+SpringJoint2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5565307947503085702}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_EnableCollision: 0
+  m_ConnectedRigidBody: {fileID: 0}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_BreakAction: 3
+  m_AutoConfigureConnectedAnchor: 0
+  m_Anchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: 0, y: 0}
+  m_AutoConfigureDistance: 0
+  m_Distance: 1
+  m_DampingRatio: 0
+  m_Frequency: 3
 --- !u!114 &2225531575797570498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,3 +189,4 @@ MonoBehaviour:
   clicked: 0
   lineFront: {fileID: 0}
   lineBack: {fileID: 0}
+  bomb: {fileID: 3590661509307064558, guid: b080385b2f1f6264799eedf682ce6ad8, type: 3}

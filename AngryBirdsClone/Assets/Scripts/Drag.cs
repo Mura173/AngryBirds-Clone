@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Drag : MonoBehaviour
@@ -23,6 +24,8 @@ public class Drag : MonoBehaviour
     private Vector2 prevVel;
     private Rigidbody2D rb;
 
+    public GameObject bomb;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +46,8 @@ public class Drag : MonoBehaviour
         SpringEffect();
 
         prevVel = rb.velocity;
+
+#if UNITY_ANDROID
 
         if (Input.touchCount > 0)
         {
@@ -68,11 +73,26 @@ public class Drag : MonoBehaviour
                 }
             }
 
-            if(touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
+            if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
             {
                 rb.isKinematic = false;
                 clicked = false;
             }
+        }
+
+#endif
+
+#if UNITY_EDITOR
+
+        if(clicked)
+        {
+            Draggin();
+        }
+#endif
+
+        if(clicked == false && rb.isKinematic == false)
+        {
+            KillBird();
         }
     }
 
@@ -96,12 +116,12 @@ public class Drag : MonoBehaviour
 
     void SpringEffect()
     {
-        if(spring != null)
+        if (spring != null)
         {
-            if(rb.isKinematic == false)
+            if (rb.isKinematic == false)
             {
                 // Retorno do comprimento do quadrado de um vetor
-                if(prevVel.sqrMagnitude > rb.velocity.sqrMagnitude)
+                if (prevVel.sqrMagnitude > rb.velocity.sqrMagnitude)
                 {
                     lineFront.enabled = false;
                     lineBack.enabled = false;
@@ -110,5 +130,40 @@ public class Drag : MonoBehaviour
                 }
             }
         }
+    }
+
+    void KillBird()
+    {
+        if (rb.velocity.magnitude == 0 && rb.IsSleeping())
+        {
+            StartCoroutine(DeathTime());
+        }
+    }
+
+    IEnumerator DeathTime()
+    {
+        yield return new WaitForSeconds(1);
+        Instantiate(bomb, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
+        Destroy(gameObject);
+    }
+
+    // Mouse
+
+    void Draggin()
+    {
+        Vector3 mouseWP = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mouseWP.z = 0f;
+        transform.position = mouseWP;
+    }
+
+    private void OnMouseDown()
+    {
+        clicked = true;
+    }
+
+    private void OnMouseUp()
+    {
+        rb.isKinematic = false;
+        clicked = false;
     }
 }
