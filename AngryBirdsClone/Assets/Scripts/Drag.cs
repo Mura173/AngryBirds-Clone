@@ -24,7 +24,11 @@ public class Drag : MonoBehaviour
     private Vector2 prevVel;
     private Rigidbody2D rb;
 
-    public GameObject bomb;
+    public ParticleSystem bomb;
+
+    // Limit
+    private Transform catapult;
+    private Ray rayToMT;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +41,9 @@ public class Drag : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         spring = GetComponent<SpringJoint2D>();
+
+        catapult = spring.connectedBody.transform;
+        rayToMT = new Ray(catapult.position, Vector3.zero);
     }
 
     // Update is called once per frame
@@ -69,6 +76,15 @@ public class Drag : MonoBehaviour
                 if (touch.phase == TouchPhase.Stationary || touch.phase == TouchPhase.Moved)
                 {
                     Vector3 tPos = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 10));
+
+                    catapultToBird = tPos - catapult.position;
+
+                    if (catapultToBird.sqrMagnitude > 9f)
+                    {
+                        rayToMT.direction = catapultToBird;
+                        tPos = rayToMT.GetPoint(3f);
+                    }
+
                     transform.position = tPos;
                 }
             }
@@ -153,6 +169,15 @@ public class Drag : MonoBehaviour
     {
         Vector3 mouseWP = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mouseWP.z = 0f;
+
+        catapultToBird = mouseWP - catapult.position;
+
+        if (catapultToBird.sqrMagnitude > 9f)
+        {
+            rayToMT.direction = catapultToBird;
+            mouseWP = rayToMT.GetPoint(3f);
+        }
+
         transform.position = mouseWP;
     }
 
